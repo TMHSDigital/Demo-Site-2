@@ -34,7 +34,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Load fonts without blocking render; swap in once ready -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" /></noscript>
 <style>
   /* ============================================================
      SyncFlow AI — single-file landing page
@@ -52,9 +55,11 @@
     --ink:       #14203A;  /* supporting 30% */
     --ink-soft:  #475069;  /* muted body text */
     --line:      #E6E9EF;
-    --accent:    #FF5A3C;  /* vivid accent 10% — CTAs / large highlights */
+    --accent:    #FF5A3C;  /* vivid accent — non-text use: halos, borders, glows */
     --accent-dk: #E8482B;
     --accent-deep: #C2381A; /* WCAG-AA accent for small text on light bg (5.1:1) */
+    --accent-cta: #D23C1E;  /* solid fill behind white text — AA 4.77:1 */
+    --accent-cta-dk: #BC3416;
     --gold:      #FFB020;
     --radius:    16px;
     --radius-sm: 10px;
@@ -144,12 +149,12 @@
     will-change: transform;
   }
   .btn-primary {
-    background: var(--accent);
+    background: var(--accent-cta);
     color: #fff;
     box-shadow: 0 12px 24px -8px rgba(255,90,60,.55);
   }
   .btn-primary:hover {
-    background: var(--accent-dk);
+    background: var(--accent-cta-dk);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 24px 44px -10px rgba(255,90,60,.62);
   }
@@ -239,7 +244,7 @@
     font-size: clamp(2.7rem, 5.2vw, 4.05rem);
     margin-bottom: 22px;
   }
-  .hero h1 .hl { color: var(--accent); font-style: italic; }
+  .hero h1 .hl { color: var(--accent-cta); font-style: italic; }
   .hero-sub {
     font-size: 1.22rem;
     max-width: 540px;
@@ -396,7 +401,7 @@
   .price-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(255,90,60,.35); }
   .price-card.pop { border-color: var(--accent); box-shadow: var(--shadow-md); transform: scale(1.03); }
   .price-card.pop:hover { transform: scale(1.03) translateY(-8px); box-shadow: var(--shadow-lg); }
-  .pop-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; }
+  .pop-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent-cta); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; }
   .price-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
   .price-card .tier-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 22px; }
   .price-amt { font-family: 'Fraunces', serif; font-size: 3.1rem; font-weight: 600; color: var(--ink); line-height: 1; }
@@ -410,7 +415,7 @@
   .faq-item { border-bottom: 1px solid var(--line); }
   .faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 26px 4px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: 'Inter', sans-serif; font-size: 1.16rem; font-weight: 600; color: var(--ink); }
   .faq-q .pm { flex: 0 0 28px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 18px; transition: transform .3s, background .3s, color .3s; }
-  .faq-item.open .faq-q .pm { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(45deg); }
+  .faq-item.open .faq-q .pm { background: var(--accent-cta); color: #fff; border-color: var(--accent-cta); transform: rotate(45deg); }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
   .faq-a-inner { padding: 0 4px 26px; font-size: 1.04rem; color: var(--ink-soft); }
 
@@ -428,9 +433,9 @@
   footer { padding: 70px 0 40px; border-top: 1px solid var(--line); margin-top: 96px; }
   .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
   .foot-brand p { font-size: 15px; margin: 16px 0 0; max-width: 280px; }
-  .foot-col h4 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 18px; font-family: 'Inter', sans-serif; font-weight: 700; }
+  .foot-col h3 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 18px; font-family: 'Inter', sans-serif; font-weight: 700; }
   .foot-col a { display: block; font-size: 15px; color: var(--ink-soft); padding: 6px 0; transition: color .2s; }
-  .foot-col a:hover { color: var(--accent); }
+  .foot-col a:hover { color: var(--accent-deep); }
   .foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--ink-soft); }
 
   /* Integrations grid */
@@ -460,7 +465,7 @@
   .compare .col-head .c-sub { display: block; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-top: 3px; }
   .compare .sf { background: rgba(255,90,60,.055); }
   .compare thead th.sf { color: var(--accent-deep); position: relative; }
-  .compare th.sf .tag { display: inline-block; margin-top: 6px; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .compare th.sf .tag { display: inline-block; margin-top: 6px; background: var(--accent-cta); color: #fff; font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
   .mark { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; font-weight: 700; }
   .mark.yes { background: #E9F8EF; color: #1F9D55; }
   .mark.no { background: #F1F3F7; color: #9AA6BC; }
@@ -972,21 +977,21 @@
         <p>Intelligent operations automation that gives high-growth teams their time back.</p>
       </div>
       <div class="foot-col">
-        <h4>Product</h4>
+        <h3>Product</h3>
         <a href="#features">Platform</a>
         <a href="#pricing">Pricing</a>
         <a href="#results">Customers</a>
         <a href="#">Integrations</a>
       </div>
       <div class="foot-col">
-        <h4>Company</h4>
+        <h3>Company</h3>
         <a href="#">About</a>
         <a href="#">Careers</a>
         <a href="#">Blog</a>
         <a href="#">Contact</a>
       </div>
       <div class="foot-col">
-        <h4>Resources</h4>
+        <h3>Resources</h3>
         <a href="#">Documentation</a>
         <a href="#">Security</a>
         <a href="#">Status</a>
