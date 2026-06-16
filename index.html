@@ -68,22 +68,32 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--ink);
     background: var(--bg);
-    line-height: 1.6;
+    line-height: 1.65;
     font-size: 17px;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
+  /* Premium heading system — balanced tracking + kerning per optical size */
   h1, h2, h3 {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 500;
     line-height: 1.08;
-    letter-spacing: -.01em;
+    letter-spacing: -.02em;
     color: var(--ink);
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    text-wrap: balance;
   }
+  h1 { letter-spacing: -.033em; line-height: 1.04; }
+  h2 { letter-spacing: -.026em; }
+  h3 { letter-spacing: -.018em; }
 
-  p { color: var(--ink-soft); }
+  p { color: var(--ink-soft); text-wrap: pretty; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
 
@@ -113,24 +123,30 @@
     border-radius: 12px;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     min-height: 54px;            /* generous thumb-friendly touch target */
     white-space: nowrap;
+    will-change: transform;
   }
   .btn-primary {
     background: var(--accent);
     color: #fff;
     box-shadow: 0 12px 24px -8px rgba(255,90,60,.55);
   }
-  .btn-primary:hover { background: var(--accent-dk); transform: translateY(-2px); box-shadow: 0 18px 32px -8px rgba(255,90,60,.6); }
+  .btn-primary:hover {
+    background: var(--accent-dk);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 24px 44px -10px rgba(255,90,60,.62);
+  }
   .btn-ghost {
     background: transparent;
     color: var(--ink);
     border-color: var(--line);
   }
-  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-3px); background: rgba(20,32,58,.035); }
   .btn-light { background:#fff; color: var(--slate); }
-  .btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .btn-light:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-md); }
+  .btn:active { transform: translateY(-1px) scale(.992); }
   .btn-block { width: 100%; }
 
   /* ---------- Header / Nav ---------- */
@@ -230,17 +246,30 @@
 
   /* Hero visual frame — clean, no noise */
   .hero-visual { position: relative; }
+  /* Soft accent halo anchors the asset without adding visual clutter */
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: -8% -6% -10% -8%;
+    background: radial-gradient(58% 58% at 72% 28%, rgba(255,90,60,.16), transparent 70%);
+    filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
+  }
   .hero-frame {
     border-radius: 22px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255,255,255,.6);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(16,26,43,.05);
+    border: 1px solid rgba(255,255,255,.65);
     background: #fff;
     transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
-    transition: transform .6s var(--ease);
+    transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .hero-frame:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
-  .hero-frame img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3.2; }
+  .hero-frame:hover {
+    transform: perspective(1400px) rotateY(0) rotateX(0) translateY(-4px);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,90,60,.18);
+  }
+  .hero-frame img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3.2; display: block; }
   .hero-badge {
     position: absolute;
     background: #fff;
@@ -251,13 +280,16 @@
     align-items: center;
     gap: 12px;
     border: 1px solid var(--line);
+    opacity: 0;                       /* fades in via JS for an elegant entrance */
+    transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  .hero-badge.shown { opacity: 1; }
   .hero-badge.tl { top: 22px; left: -28px; }
   .hero-badge.br { bottom: 26px; right: -26px; }
   .hero-badge .dot { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-size: 19px; }
   .hero-badge .dot.green { background: #E9F8EF; }
   .hero-badge .dot.coral { background: #FFEDE8; }
-  .hero-badge .b-num { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .hero-badge .b-num { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
   .hero-badge .b-lab { font-size: 12px; color: var(--ink-soft); }
 
   .float { animation: float 6s ease-in-out infinite; }
@@ -296,9 +328,10 @@
   .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; }
   .prob-card {
     background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 34px 30px; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    padding: 34px 30px; box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .prob-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .prob-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: rgba(255,90,60,.28); }
   .prob-ico { width: 52px; height: 52px; border-radius: 13px; background: #FFEDE8; display: grid; place-items: center; font-size: 24px; margin-bottom: 20px; }
   .prob-card h3 { font-size: 1.32rem; margin-bottom: 10px; }
 
@@ -322,9 +355,10 @@
   .test-card {
     background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 34px 30px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
-    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .test-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .test-card:hover { transform: translateY(-8px) scale(1.012); box-shadow: var(--shadow-lg); }
+  .test-card:not(.featured):hover { border-color: rgba(255,90,60,.3); }
   .test-card.featured { background: var(--slate); }
   .test-card.featured p, .test-card.featured .t-role { color: #B9C2D4; }
   .test-card.featured .t-name { color: #fff; }
@@ -342,11 +376,11 @@
   .price-card {
     background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 38px 32px; display: flex; flex-direction: column; position: relative;
-    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .price-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(255,90,60,.35); }
   .price-card.pop { border-color: var(--accent); box-shadow: var(--shadow-md); transform: scale(1.03); }
-  .price-card.pop:hover { transform: scale(1.03) translateY(-6px); }
+  .price-card.pop:hover { transform: scale(1.03) translateY(-8px); box-shadow: var(--shadow-lg); }
   .pop-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; }
   .price-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
   .price-card .tier-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 22px; }
@@ -414,6 +448,21 @@
     .foot-grid { grid-template-columns: 1fr; }
     .final-cta { padding: 60px 24px; border-radius: 20px; }
     body { font-size: 16px; }
+    /* Left-aligned copy rhythm on mobile — no awkward centering */
+    .section-head { text-align: left; margin-left: 0; margin-right: 0; max-width: none; }
+    .section-head p { margin-left: 0; margin-right: 0; }
+  }
+
+  /* Respect reduced-motion preferences for all polish animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hero-badge { opacity: 1 !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
   }
 </style>
 </head>
@@ -481,15 +530,15 @@
 
       <div class="hero-visual">
         <div class="hero-frame">
-          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=720&fit=crop" alt="SyncFlow AI operations dashboard showing automated workflows" loading="eager" />
+          <img src="image_5bce99.png" alt="SyncFlow AI Dashboard Interface" loading="eager" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=720&fit=crop&q=80';">
         </div>
         <div class="hero-badge tl float" aria-hidden="true">
           <span class="dot green">⚡</span>
-          <span><span class="b-num">12,480</span><br /><span class="b-lab">tasks automated today</span></span>
+          <span><span class="b-num" data-ticker data-value="12480" data-format="comma">12,480</span><br /><span class="b-lab">tasks automated today</span></span>
         </div>
         <div class="hero-badge br float delay" aria-hidden="true">
           <span class="dot coral">⏱</span>
-          <span><span class="b-num">+22 hrs</span><br /><span class="b-lab">saved per person / week</span></span>
+          <span><span class="b-num" data-ticker data-value="22" data-prefix="+" data-suffix=" hrs">+22 hrs</span><br /><span class="b-lab">saved per person / week</span></span>
         </div>
       </div>
     </div>
@@ -856,6 +905,44 @@
     el.style.transitionDelay = (i % 3) * 80 + 'ms';
     io.observe(el);
   });
+
+  // Respect reduced-motion for the JS-driven polish
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Elegant count-up for the numeric badge callouts (12,480 and +22 hrs)
+  function runTicker(el) {
+    const value = parseFloat(el.dataset.value) || 0;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const comma = el.dataset.format === 'comma';
+    const fmt = (n) => prefix + (comma ? n.toLocaleString('en-US') : n) + suffix;
+    if (reduceMotion) { el.textContent = fmt(value); return; }
+    const duration = 1400;
+    const start = performance.now();
+    el.textContent = fmt(0);
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      el.textContent = fmt(Math.round(value * eased));
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const tickerIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { runTicker(e.target); tickerIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-ticker]').forEach((el) => tickerIO.observe(el));
+
+  // Subtle staggered fade-in for the floating hero badges
+  const showBadges = () => {
+    document.querySelectorAll('.hero-badge').forEach((b, i) => {
+      setTimeout(() => b.classList.add('shown'), 300 + i * 200);
+    });
+  };
+  if (document.readyState === 'complete') showBadges();
+  else window.addEventListener('load', showBadges);
 </script>
 </body>
 </html>
