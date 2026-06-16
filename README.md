@@ -68,6 +68,8 @@ Design decisions are deliberate rather than incidental:
 
 </div>
 
+These images are regenerated with the capture script in [`scripts/screenshots/`](scripts/screenshots/).
+
 ## Sections
 
 | Section | Purpose |
@@ -129,6 +131,8 @@ Updating `--accent` re-themes every primary action at once. Replace the Google F
 ```
 .
 ├── index.html                   # complete site (HTML, CSS, JS)
+├── docs/screenshots/            # README images
+├── scripts/screenshots/         # headless-Chrome capture tooling
 ├── .github/workflows/deploy.yml # GitHub Pages deployment
 ├── .gitattributes               # line-ending normalization
 ├── .gitignore

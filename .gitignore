@@ -13,6 +13,13 @@ desktop.ini
 *.log
 *.tmp
 
+# Node / tooling dependencies (e.g. scripts/screenshots)
+node_modules/
+npm-debug.log*
+yarn-error.log
+.npm/
+package-lock.json
+
 # Local env / secrets (none needed for this static site, but just in case)
 .env
 .env.local

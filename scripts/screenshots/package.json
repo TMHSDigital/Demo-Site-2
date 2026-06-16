@@ -1,0 +1,12 @@
+{
+  "name": "syncflow-screenshots",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Capture README screenshots of the SyncFlow AI site via headless Chrome.",
+  "scripts": {
+    "shoot": "node capture.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^22.15.0"
+  }
+}
