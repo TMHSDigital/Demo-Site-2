@@ -1,88 +1,88 @@
 # SyncFlow AI
 
-A B2B SaaS landing page built as a single, dependency-free `index.html`. No framework, no build step, no npm install. Open the file in a browser and it runs.
+A responsive B2B SaaS landing page contained in a single `index.html` file. It uses no framework and no build step: the markup, styles, and scripts are self-contained, and the page renders directly in any modern browser.
 
 **Live site:** https://tmhsdigital.github.io/syncflow-frontend-demo/
 
 [![Deploy to GitHub Pages](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml/badge.svg)](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-> SyncFlow AI is a made-up company. The product, metrics, testimonials, customer logos, and names are all placeholders for the demo. Nothing here is a real claim.
+> SyncFlow AI is a fictional company created for this demo. The product, metrics, testimonials, and customer names are placeholders and do not represent real claims.
 
-## What this is
+## Overview
 
-A marketing landing page for a fictional operations-automation product, written by hand to see how complete a page can be with nothing but HTML, CSS, and a bit of vanilla JavaScript. Everything lives in one file: the styles sit in a single `<style>` block, the behavior in a single `<script>`. The only thing loaded over the network is Google Fonts; the imagery comes from Unsplash.
+The page presents a fictional operations-automation product as a complete marketing site: hero, social proof, problem framing, features, pricing, FAQ, and a closing call to action. It serves as a self-contained reference for building a conversion-focused landing page without a frontend toolchain.
 
-It's also a reference for a few things I wanted to get right on a real landing page:
+Design decisions are deliberate rather than incidental:
 
-- A clear top-to-bottom narrative (hero, proof, problem, solution, pricing, objections, call to action) rather than a pile of disconnected sections.
-- A disciplined color system. Roughly 60% neutral background, 30% slate for text and structure, 10% accent. The coral accent (`#FF5A3C`) is used only for primary buttons so the eye always knows where to click.
-- Two typefaces, no more: Fraunces for headings, Inter for body.
-- Responsive layout that stacks on small screens, a real hamburger menu, and tap targets big enough for a thumb. No carousels that hide content behind a swipe.
+- **Visual hierarchy.** Sections follow a single narrative from value proposition to call to action, so the page reads as one argument rather than a set of unrelated blocks.
+- **Color discipline.** The palette follows a 60/30/10 split: a neutral background, slate for text and structure, and a coral accent (`#FF5A3C`) reserved for primary actions, so the next step is always visually obvious.
+- **Typography.** Two typefaces only: Fraunces for headings and Inter for body text.
+- **Responsiveness.** Layouts collapse to a single column on small screens, navigation condenses into a menu, and interactive targets are sized for touch. No content is hidden inside carousels.
 
-## The page, section by section
+## Sections
 
-| Section | What it's doing |
+| Section | Purpose |
 | --- | --- |
-| Hero | States the value in one line, gives one obvious button, shows a rating |
-| Logo marquee | Borrowed credibility, high up the page |
-| Stats band | Puts numbers on the claim |
-| Problem grid | Names the pain the product removes |
-| Features | Connect / Automate / Watch, in an alternating layout |
-| Testimonials | Quotes built around a specific outcome, not vague praise |
-| Pricing | Three tiers, the middle one highlighted |
-| FAQ | Answers the objections that stall a signup |
-| Final CTA | One last, low-friction ask |
+| Hero | States the core value proposition with a single primary action |
+| Logo marquee | Establishes credibility early |
+| Stats band | Supports the value proposition with figures |
+| Problem grid | Frames the pain points the product addresses |
+| Features | Presents Connect, Automate, and Watch in an alternating layout |
+| Testimonials | Pairs each quote with a specific outcome |
+| Pricing | Three tiers with the recommended plan emphasized |
+| FAQ | Resolves common objections |
+| Final CTA | Closes with a low-friction prompt |
 
-## Under the hood
+## Implementation
 
-The JavaScript is small and does four things: a shadow on the header once you scroll, the mobile menu toggle, the FAQ accordion, and fade-in-on-scroll using `IntersectionObserver`. If JavaScript fails to load, the content is all still there and readable.
+All styling lives in a single `<style>` block and all behavior in a single `<script>`. The only external resource is Google Fonts; imagery is served from Unsplash.
 
-CSS leans on custom properties, flexbox and grid for layout, and `clamp()` for type that scales with the viewport instead of jumping at breakpoints.
+The CSS uses custom properties for theming, flexbox and grid for layout, and `clamp()` for typography that scales fluidly with the viewport. The JavaScript is limited to four responsibilities: a header shadow on scroll, the mobile menu toggle, the FAQ accordion, and scroll-triggered reveals via `IntersectionObserver`. All content remains visible and legible if JavaScript does not execute.
 
-## Running it locally
+## Local development
 
-Clone it and open the file:
+No dependencies or build step are required.
 
 ```bash
 git clone https://github.com/TMHSDigital/syncflow-frontend-demo.git
 cd syncflow-frontend-demo
 ```
 
-Double-clicking `index.html` works. If you'd rather serve it over HTTP (closer to how it runs in production), any static server will do:
+Open `index.html` directly, or serve it over HTTP to match production behavior:
 
 ```bash
-python -m http.server 8000   # then open http://localhost:8000
+python -m http.server 8000   # http://localhost:8000
 ```
 
-## Deploying
+## Deployment
 
-A push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which publishes the site to GitHub Pages. To set this up on a fork:
+Pushing to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which publishes the site to GitHub Pages. To configure this on a fork:
 
-1. **Settings → Pages → Build and deployment**
-2. Set **Source** to **GitHub Actions**
-3. Push to `main`
+1. Open **Settings → Pages → Build and deployment**.
+2. Set **Source** to **GitHub Actions**.
+3. Push to `main`.
 
-## Making it your own
+## Customization
 
-Everything is editable in one file. The design tokens sit at the top of the `<style>` block:
+The design tokens are defined at the top of the `<style>` block:
 
 ```css
 :root {
   --bg:     #F7F8FA;  /* dominant background    */
   --ink:    #14203A;  /* text and structure     */
-  --accent: #FF5A3C;  /* buttons / accents only */
+  --accent: #FF5A3C;  /* buttons and accents    */
 }
 ```
 
-Change `--accent` and every button updates at once. Swap the Google Fonts link and the `font-family` rules to change the type. The copy is plain HTML, so editing the headlines and testimonials is just editing text.
+Updating `--accent` re-themes every primary action at once. Replace the Google Fonts link and the `font-family` declarations to change the type. All copy is plain HTML and can be edited in place.
 
-## Project layout
+## Project structure
 
 ```
 .
-├── index.html                   # the whole site
-├── .github/workflows/deploy.yml # GitHub Pages deploy
+├── index.html                   # complete site (HTML, CSS, JS)
+├── .github/workflows/deploy.yml # GitHub Pages deployment
 ├── .gitattributes               # line-ending normalization
 ├── .gitignore
 ├── LICENSE
@@ -91,4 +91,4 @@ Change `--accent` and every button updates at once. Swap the Google Fonts link a
 
 ## License
 
-[MIT](LICENSE). Photos are used under the [Unsplash License](https://unsplash.com/license); the fonts are under the [SIL Open Font License](https://openfontlicense.org/).
+Released under the [MIT License](LICENSE). Imagery is used under the [Unsplash License](https://unsplash.com/license); fonts are licensed under the [SIL Open Font License](https://openfontlicense.org/).
