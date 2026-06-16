@@ -40,6 +40,34 @@ Design decisions are deliberate rather than incidental:
 - **Typography.** Two typefaces only: Fraunces for headings and Inter for body text.
 - **Responsiveness.** Layouts collapse to a single column on small screens, navigation condenses into a menu, and interactive targets are sized for touch. No content is hidden inside carousels.
 
+## Screenshots
+
+<div align="center">
+
+<img src="docs/screenshots/hero.png" width="900" alt="SyncFlow AI hero section" />
+
+<br /><br />
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/testimonials.png" alt="Outcome-focused testimonials" /></td>
+    <td width="50%"><img src="docs/screenshots/pricing.png" alt="Pricing tiers" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Testimonials</sub></td>
+    <td align="center"><sub>Pricing</sub></td>
+  </tr>
+</table>
+
+<br />
+
+<img src="docs/screenshots/mobile.png" width="280" alt="Responsive layout on mobile" />
+
+<br />
+<sub>Responsive layout on mobile</sub>
+
+</div>
+
 ## Sections
 
 | Section | Purpose |
