@@ -6,9 +6,9 @@
 
 Built with hand‑written HTML, CSS, and vanilla JavaScript — no framework, no build step.
 
-[**▶ View the live site**](https://tmhsdigital.github.io/Demo-Site-2/)
+[**▶ View the live site**](https://tmhsdigital.github.io/syncflow-frontend-demo/)
 
-[![Deploy to GitHub Pages](https://github.com/TMHSDigital/Demo-Site-2/actions/workflows/deploy.yml/badge.svg)](https://github.com/TMHSDigital/Demo-Site-2/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml/badge.svg)](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml)
 ![No build step](https://img.shields.io/badge/build-none-success)
 ![Single file](https://img.shields.io/badge/source-single%20file-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
@@ -62,8 +62,8 @@ This repo contains a conversion‑optimized (CRO) landing page for **SyncFlow AI
 No dependencies or build step required.
 
 ```bash
-git clone https://github.com/TMHSDigital/Demo-Site-2.git
-cd Demo-Site-2
+git clone https://github.com/TMHSDigital/syncflow-frontend-demo.git
+cd syncflow-frontend-demo
 ```
 
 Then either:
@@ -90,7 +90,7 @@ To replicate on a fork:
 ## Project structure
 
 ```
-Demo-Site-2/
+syncflow-frontend-demo/
 ├── index.html                # The entire site (HTML + CSS + JS)
 ├── .github/
 │   └── workflows/
