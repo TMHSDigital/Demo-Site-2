@@ -1,121 +1,94 @@
-<div align="center">
+# SyncFlow AI
 
-# SyncFlow AI — Landing Page
+A B2B SaaS landing page built as a single, dependency-free `index.html`. No framework, no build step, no npm install. Open the file in a browser and it runs.
 
-**A premium, single-file marketing landing page for a fictional B2B SaaS operations‑automation platform.**
-
-Built with hand‑written HTML, CSS, and vanilla JavaScript — no framework, no build step.
-
-[**▶ View the live site**](https://tmhsdigital.github.io/syncflow-frontend-demo/)
+**Live site:** https://tmhsdigital.github.io/syncflow-frontend-demo/
 
 [![Deploy to GitHub Pages](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml/badge.svg)](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml)
-![No build step](https://img.shields.io/badge/build-none-success)
-![Single file](https://img.shields.io/badge/source-single%20file-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-</div>
+> SyncFlow AI is a made-up company. The product, metrics, testimonials, customer logos, and names are all placeholders for the demo. Nothing here is a real claim.
 
----
+## What this is
 
-## Overview
+A marketing landing page for a fictional operations-automation product, written by hand to see how complete a page can be with nothing but HTML, CSS, and a bit of vanilla JavaScript. Everything lives in one file: the styles sit in a single `<style>` block, the behavior in a single `<script>`. The only thing loaded over the network is Google Fonts; the imagery comes from Unsplash.
 
-This repo contains a conversion‑optimized (CRO) landing page for **SyncFlow AI**, a fictional intelligent operations‑automation product. It exists as a demonstration of how far a single, dependency‑free `index.html` can go: premium typography, a clear visual hierarchy, social proof, and full responsiveness — all self‑contained.
+It's also a reference for a few things I wanted to get right on a real landing page:
 
-> **Note:** "SyncFlow AI" is a fictional brand created for this demo. All metrics, testimonials, logos, and customer names are illustrative placeholders, not real claims.
+- A clear top-to-bottom narrative (hero, proof, problem, solution, pricing, objections, call to action) rather than a pile of disconnected sections.
+- A disciplined color system. Roughly 60% neutral background, 30% slate for text and structure, 10% accent. The coral accent (`#FF5A3C`) is used only for primary buttons so the eye always knows where to click.
+- Two typefaces, no more: Fraunces for headings, Inter for body.
+- Responsive layout that stacks on small screens, a real hamburger menu, and tap targets big enough for a thumb. No carousels that hide content behind a swipe.
 
-## Highlights
+## The page, section by section
 
-- **Single‑file & self‑contained** — all CSS lives in one `<style>` block and all interactivity is vanilla JS. The only external dependency is Google Fonts.
-- **No build tooling** — no npm, no bundler, no transpiler. Open the file and it works.
-- **CRO‑driven layout** — Z‑pattern reading flow with each section serving a distinct strategic purpose (objection handling, confidence building, conversion).
-- **60‑30‑10 color system** — off‑white neutral (60%), slate structure (30%), and a single vivid coral accent (10%) reserved strictly for primary CTAs.
-- **Two‑family typography** — `Fraunces` (display serif) paired with `Inter` (body sans).
-- **Social‑proof layer** — animated logo marquee, outcome‑oriented testimonials with hard numbers, and ★ rating badges at every conversion touchpoint.
-- **Fully responsive** — CSS grid/flex that stacks cleanly on mobile, a collapsible hamburger nav, and ≥54px touch targets. No text‑hiding carousels.
-- **Progressive enhancement** — scroll‑reveal animations, sticky header, FAQ accordion, and mobile menu all degrade gracefully without JS.
-
-## Page sections
-
-| Section | Strategic purpose |
+| Section | What it's doing |
 | --- | --- |
-| Hero | Benefit‑led headline + primary CTA + trust badge |
-| Logo marquee | Establish credibility near the top of the scroll |
-| Stats band | Quantify the value proposition |
-| Problem grid | Name the pain / handle objections |
-| Features (Connect · Automate · Watch) | Demonstrate capability in a Z‑pattern |
-| Testimonials | Outcome‑focused social proof with metrics |
-| Pricing | Drive the decision with a highlighted tier |
-| FAQ | Remove final objections |
-| Final CTA | Convert |
+| Hero | States the value in one line, gives one obvious button, shows a rating |
+| Logo marquee | Borrowed credibility, high up the page |
+| Stats band | Puts numbers on the claim |
+| Problem grid | Names the pain the product removes |
+| Features | Connect / Automate / Watch, in an alternating layout |
+| Testimonials | Quotes built around a specific outcome, not vague praise |
+| Pricing | Three tiers, the middle one highlighted |
+| FAQ | Answers the objections that stall a signup |
+| Final CTA | One last, low-friction ask |
 
-## Tech stack
+## Under the hood
 
-- **HTML5** — semantic, accessible markup
-- **CSS3** — custom properties, grid/flexbox, `clamp()` fluid type, `IntersectionObserver`‑driven reveals
-- **Vanilla JavaScript** — sticky header, mobile menu, FAQ accordion, scroll animations
-- **[Google Fonts](https://fonts.google.com/)** — Fraunces + Inter (only external request)
-- **[Unsplash](https://unsplash.com/)** — placeholder imagery
-- **GitHub Pages + Actions** — hosting and CI/CD
+The JavaScript is small and does four things: a shadow on the header once you scroll, the mobile menu toggle, the FAQ accordion, and fade-in-on-scroll using `IntersectionObserver`. If JavaScript fails to load, the content is all still there and readable.
 
-## Run it locally
+CSS leans on custom properties, flexbox and grid for layout, and `clamp()` for type that scales with the viewport instead of jumping at breakpoints.
 
-No dependencies or build step required.
+## Running it locally
+
+Clone it and open the file:
 
 ```bash
 git clone https://github.com/TMHSDigital/syncflow-frontend-demo.git
 cd syncflow-frontend-demo
 ```
 
-Then either:
-
-- **Just open it** — double‑click `index.html`, or
-- **Serve it** (recommended, mirrors production):
+Double-clicking `index.html` works. If you'd rather serve it over HTTP (closer to how it runs in production), any static server will do:
 
 ```bash
-# Python 3
-python -m http.server 8000
-# then visit http://localhost:8000
+python -m http.server 8000   # then open http://localhost:8000
 ```
 
-## Deployment
+## Deploying
 
-The site auto‑deploys to **GitHub Pages** on every push to `main` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+A push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which publishes the site to GitHub Pages. To set this up on a fork:
 
-To replicate on a fork:
+1. **Settings → Pages → Build and deployment**
+2. Set **Source** to **GitHub Actions**
+3. Push to `main`
 
-1. Go to **Settings → Pages → Build and deployment**.
-2. Set **Source** to **GitHub Actions**.
-3. Push to `main` — the workflow builds and publishes automatically.
+## Making it your own
 
-## Project structure
+Everything is editable in one file. The design tokens sit at the top of the `<style>` block:
+
+```css
+:root {
+  --bg:     #F7F8FA;  /* dominant background    */
+  --ink:    #14203A;  /* text and structure     */
+  --accent: #FF5A3C;  /* buttons / accents only */
+}
+```
+
+Change `--accent` and every button updates at once. Swap the Google Fonts link and the `font-family` rules to change the type. The copy is plain HTML, so editing the headlines and testimonials is just editing text.
+
+## Project layout
 
 ```
-syncflow-frontend-demo/
-├── index.html                # The entire site (HTML + CSS + JS)
-├── .github/
-│   └── workflows/
-│       └── deploy.yml         # GitHub Pages deployment
-├── .gitattributes             # Consistent line endings
+.
+├── index.html                   # the whole site
+├── .github/workflows/deploy.yml # GitHub Pages deploy
+├── .gitattributes               # line-ending normalization
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
 
-## Customizing
-
-Because everything lives in `index.html`, edits are quick. The design system is driven by CSS custom properties near the top of the `<style>` block:
-
-```css
-:root {
-  --bg:     #F7F8FA;  /* 60% dominant neutral     */
-  --ink:    #14203A;  /* 30% supporting structure */
-  --accent: #FF5A3C;  /* 10% accent — CTAs only   */
-  /* ...fonts, radii, shadows, spacing */
-}
-```
-
-Change `--accent` to re‑skin every CTA at once; swap the Google Fonts `<link>` and the heading/body `font-family` rules to restyle typography.
-
 ## License
 
-Released under the [MIT License](LICENSE). Imagery is served from Unsplash under the [Unsplash License](https://unsplash.com/license); fonts are licensed under the [SIL Open Font License](https://openfontlicense.org/).
+[MIT](LICENSE). Photos are used under the [Unsplash License](https://unsplash.com/license); the fonts are under the [SIL Open Font License](https://openfontlicense.org/).
