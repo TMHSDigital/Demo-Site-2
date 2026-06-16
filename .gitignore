@@ -16,3 +16,6 @@ desktop.ini
 # Local env / secrets (none needed for this static site, but just in case)
 .env
 .env.local
+
+# Local AI/tooling config (not part of the site)
+CLAUDE.md
