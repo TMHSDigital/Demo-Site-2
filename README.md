@@ -1,12 +1,32 @@
+<div align="center">
+
 # SyncFlow AI
 
-A responsive B2B SaaS landing page contained in a single `index.html` file. It uses no framework and no build step: the markup, styles, and scripts are self-contained, and the page renders directly in any modern browser.
+**A responsive B2B SaaS landing page contained in a single `index.html` file.**
 
-**Live site:** https://tmhsdigital.github.io/syncflow-frontend-demo/
+No framework, no build step. The markup, styles, and scripts are self-contained, and the page renders directly in any modern browser.
+
+<br />
+
+[![View Live Site](https://img.shields.io/badge/View_Live_Site-FF5A3C?style=for-the-badge&logo=githubpages&logoColor=white)](https://tmhsdigital.github.io/syncflow-frontend-demo/)
+
+<br />
 
 [![Deploy to GitHub Pages](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml/badge.svg)](https://github.com/TMHSDigital/syncflow-frontend-demo/actions/workflows/deploy.yml)
-![License: MIT](https://img.shields.io/badge/license-MIT-green)
+[![License: MIT](https://img.shields.io/github/license/TMHSDigital/syncflow-frontend-demo?color=green)](LICENSE)
+![Last commit](https://img.shields.io/github/last-commit/TMHSDigital/syncflow-frontend-demo)
+![Repo size](https://img.shields.io/github/repo-size/TMHSDigital/syncflow-frontend-demo)
+![Top language](https://img.shields.io/github/languages/top/TMHSDigital/syncflow-frontend-demo)
 
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![No dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
+![Build](https://img.shields.io/badge/build-none-success)
+
+</div>
+
+> [!NOTE]
 > SyncFlow AI is a fictional company created for this demo. The product, metrics, testimonials, and customer names are placeholders and do not represent real claims.
 
 ## Overview
@@ -57,11 +77,10 @@ python -m http.server 8000   # http://localhost:8000
 
 ## Deployment
 
-Pushing to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which publishes the site to GitHub Pages. To configure this on a fork:
+Pushing to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which publishes the site to GitHub Pages.
 
-1. Open **Settings → Pages → Build and deployment**.
-2. Set **Source** to **GitHub Actions**.
-3. Push to `main`.
+> [!TIP]
+> To configure this on a fork, open **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**, and push to `main`.
 
 ## Customization
 
@@ -92,3 +111,12 @@ Updating `--accent` re-themes every primary action at once. Replace the Google F
 ## License
 
 Released under the [MIT License](LICENSE). Imagery is used under the [Unsplash License](https://unsplash.com/license); fonts are licensed under the [SIL Open Font License](https://openfontlicense.org/).
+
+<div align="center">
+<br />
+
+[**Live site**](https://tmhsdigital.github.io/syncflow-frontend-demo/) · [**Report an issue**](https://github.com/TMHSDigital/syncflow-frontend-demo/issues) · [**MIT License**](LICENSE)
+
+<sub>Built by <a href="https://github.com/TMHSDigital">TMHSDigital</a> · <a href="#syncflow-ai">Back to top ↑</a></sub>
+
+</div>
