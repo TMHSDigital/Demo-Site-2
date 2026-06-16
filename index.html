@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="SyncFlow AI is the intelligent operations automation platform that eliminates manual busywork, syncs your tools, and gives ops teams back 20+ hours a week." />
+<title>SyncFlow AI — Intelligent Operations Automation for Modern Teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     SyncFlow AI — single-file landing page
+     Color system (60-30-10):
+       60% dominant neutral .... #F7F8FA off-white / #0E1A2B deep slate
+       30% supporting structure  #1F2A44 slate / #475069 muted text
+       10% accent (CTAs only) ... #FF5A3C vivid coral
+     Type: Fraunces (display serif) + Inter (body sans)
+     ============================================================ */
+
+  :root {
+    --bg:        #F7F8FA;  /* dominant 60% */
+    --bg-alt:    #FFFFFF;
+    --slate:     #0E1A2B;  /* deep slate (dominant on dark sections) */
+    --ink:       #14203A;  /* supporting 30% */
+    --ink-soft:  #475069;  /* muted body text */
+    --line:      #E6E9EF;
+    --accent:    #FF5A3C;  /* vivid accent 10% — CTAs only */
+    --accent-dk: #E8482B;
+    --gold:      #FFB020;
+    --radius:    16px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 1px 3px rgba(16,26,43,.06), 0 1px 2px rgba(16,26,43,.04);
+    --shadow-md: 0 18px 40px -12px rgba(16,26,43,.18);
+    --shadow-lg: 0 40px 80px -24px rgba(16,26,43,.28);
+    --maxw: 1180px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+
+  p { color: var(--ink-soft); }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+    padding: 17px 30px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+    min-height: 54px;            /* generous thumb-friendly touch target */
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 12px 24px -8px rgba(255,90,60,.55);
+  }
+  .btn-primary:hover { background: var(--accent-dk); transform: translateY(-2px); box-shadow: 0 18px 32px -8px rgba(255,90,60,.6); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .btn-light { background:#fff; color: var(--slate); }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .btn-block { width: 100%; }
+
+  /* ---------- Header / Nav ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,248,250,.82);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, box-shadow .3s;
+  }
+  header.scrolled { border-color: var(--line); box-shadow: var(--shadow-sm); }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 74px;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; font-size: 19px; color: var(--ink); letter-spacing:-.01em; }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent), #FF8A3C);
+    display: grid; place-items: center;
+    box-shadow: 0 6px 14px -4px rgba(255,90,60,.5);
+  }
+  .brand-mark svg { width: 19px; height: 19px; }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a.navlink { font-size: 15px; font-weight: 500; color: var(--ink-soft); transition: color .2s; }
+  .nav-links a.navlink:hover { color: var(--ink); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .nav-cta .btn { padding: 12px 22px; min-height: 46px; font-size: 15px; }
+
+  .hamburger {
+    display: none;
+    width: 46px; height: 46px;
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 11px;
+    cursor: pointer;
+    position: relative;
+  }
+  .hamburger span {
+    position: absolute; left: 12px; right: 12px; height: 2px; background: var(--ink);
+    transition: transform .3s var(--ease), opacity .2s;
+  }
+  .hamburger span:nth-child(1){ top: 16px; }
+  .hamburger span:nth-child(2){ top: 22px; }
+  .hamburger span:nth-child(3){ top: 28px; }
+  .hamburger.open span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity: 0; }
+  .hamburger.open span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 24px 26px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu a.navlink { padding: 14px 4px; font-size: 17px; font-weight: 500; border-bottom: 1px solid var(--line); }
+  .mobile-menu .btn { margin-top: 16px; }
+  .mobile-menu.open { display: flex; }
+
+  /* ---------- Hero (Z-pattern top) ---------- */
+  .hero { padding: 70px 0 40px; position: relative; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.7rem, 5.2vw, 4.05rem);
+    margin-bottom: 22px;
+  }
+  .hero h1 .hl { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 1.22rem;
+    max-width: 540px;
+    margin-bottom: 34px;
+    color: var(--ink-soft);
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-trust { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .stars { color: var(--gold); font-size: 17px; letter-spacing: 2px; }
+  .hero-trust .rating-text { font-size: 14px; color: var(--ink-soft); }
+  .hero-trust .rating-text strong { color: var(--ink); }
+
+  .avatars { display: flex; }
+  .avatars img {
+    width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--bg);
+    object-fit: cover; margin-left: -10px;
+  }
+  .avatars img:first-child { margin-left: 0; }
+
+  /* Hero visual frame — clean, no noise */
+  .hero-visual { position: relative; }
+  .hero-frame {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255,255,255,.6);
+    background: #fff;
+    transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+    transition: transform .6s var(--ease);
+  }
+  .hero-frame:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
+  .hero-frame img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3.2; }
+  .hero-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--line);
+  }
+  .hero-badge.tl { top: 22px; left: -28px; }
+  .hero-badge.br { bottom: 26px; right: -26px; }
+  .hero-badge .dot { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-size: 19px; }
+  .hero-badge .dot.green { background: #E9F8EF; }
+  .hero-badge .dot.coral { background: #FFEDE8; }
+  .hero-badge .b-num { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .hero-badge .b-lab { font-size: 12px; color: var(--ink-soft); }
+
+  .float { animation: float 6s ease-in-out infinite; }
+  .float.delay { animation-delay: -3s; }
+  @keyframes float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-12px);} }
+
+  /* ---------- Logo wall (moving marquee) ---------- */
+  .logos { padding: 30px 0 48px; }
+  .logos-label { text-align: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; margin-bottom: 26px; }
+  .marquee { position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .marquee-track { display: flex; width: max-content; gap: 70px; animation: scroll 32s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-track .logo {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 25px; color: var(--ink);
+    opacity: .42; white-space: nowrap; display: flex; align-items: center; gap: 9px; transition: opacity .3s;
+  }
+  .marquee-track .logo:hover { opacity: .85; }
+  .marquee-track .logo span.ico { font-size: 20px; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- Sections ---------- */
+  section { position: relative; }
+  .section { padding: 96px 0; }
+  .section-head { max-width: 680px; margin: 0 auto 60px; text-align: center; }
+  .section-head h2 { font-size: clamp(2rem, 3.8vw, 2.95rem); margin-bottom: 18px; }
+  .section-head p { font-size: 1.13rem; }
+
+  /* Stats band */
+  .stats-band { background: var(--slate); color: #fff; padding: 64px 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; text-align: center; }
+  .stat .num { font-family: 'Fraunces', serif; font-size: clamp(2.4rem,4vw,3.3rem); font-weight: 600; color: #fff; line-height: 1; }
+  .stat .num .accent { color: var(--accent); }
+  .stat .lab { color: #9AA6BC; font-size: 15px; margin-top: 10px; }
+
+  /* Problem / objection-handling */
+  .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; }
+  .prob-card {
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 34px 30px; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .prob-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .prob-ico { width: 52px; height: 52px; border-radius: 13px; background: #FFEDE8; display: grid; place-items: center; font-size: 24px; margin-bottom: 20px; }
+  .prob-card h3 { font-size: 1.32rem; margin-bottom: 10px; }
+
+  /* Features — alternating Z-pattern */
+  .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; margin-bottom: 110px; }
+  .feature-row:last-child { margin-bottom: 0; }
+  .feature-row.reverse .f-text { order: 2; }
+  .feature-row.reverse .f-visual { order: 1; }
+  .f-text .eyebrow { margin-bottom: 14px; }
+  .f-text h3 { font-size: clamp(1.7rem, 3vw, 2.35rem); margin-bottom: 18px; }
+  .f-text p { font-size: 1.1rem; margin-bottom: 24px; }
+  .f-list { list-style: none; display: grid; gap: 14px; }
+  .f-list li { display: flex; gap: 13px; align-items: flex-start; font-size: 1.02rem; color: var(--ink); }
+  .check { flex: 0 0 24px; width: 24px; height: 24px; border-radius: 50%; background: #E9F8EF; color: #1F9D55; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 2px; }
+  .f-visual { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--line); position: relative; }
+  .f-visual img { width: 100%; aspect-ratio: 5/4; object-fit: cover; }
+
+  /* Testimonials — outcome oriented, no carousel */
+  .test-section { background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); }
+  .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; }
+  .test-card {
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 34px 30px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .test-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .test-card.featured { background: var(--slate); }
+  .test-card.featured p, .test-card.featured .t-role { color: #B9C2D4; }
+  .test-card.featured .t-name { color: #fff; }
+  .test-card .stars { margin-bottom: 18px; }
+  .test-metric { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 14px; color: var(--ink); }
+  .test-card.featured .test-metric { color: var(--accent); }
+  .test-quote { font-size: 1.06rem; color: var(--ink-soft); margin-bottom: 26px; flex: 1; }
+  .test-author { display: flex; align-items: center; gap: 13px; }
+  .test-author img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+  .t-name { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .t-role { font-size: 13px; color: var(--ink-soft); }
+
+  /* Pricing */
+  .price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; align-items: stretch; }
+  .price-card {
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 38px 32px; display: flex; flex-direction: column; position: relative;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .price-card.pop { border-color: var(--accent); box-shadow: var(--shadow-md); transform: scale(1.03); }
+  .price-card.pop:hover { transform: scale(1.03) translateY(-6px); }
+  .pop-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; }
+  .price-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
+  .price-card .tier-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 22px; }
+  .price-amt { font-family: 'Fraunces', serif; font-size: 3.1rem; font-weight: 600; color: var(--ink); line-height: 1; }
+  .price-amt span { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; color: var(--ink-soft); }
+  .price-feats { list-style: none; display: grid; gap: 13px; margin: 26px 0 30px; flex: 1; }
+  .price-feats li { display: flex; gap: 11px; font-size: 15px; align-items: flex-start; }
+  .price-feats .check { flex: 0 0 22px; width: 22px; height: 22px; font-size: 12px; }
+
+  /* FAQ — objection handling */
+  .faq-wrap { max-width: 780px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 26px 4px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: 'Inter', sans-serif; font-size: 1.16rem; font-weight: 600; color: var(--ink); }
+  .faq-q .pm { flex: 0 0 28px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 18px; transition: transform .3s, background .3s, color .3s; }
+  .faq-item.open .faq-q .pm { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+  .faq-a-inner { padding: 0 4px 26px; font-size: 1.04rem; color: var(--ink-soft); }
+
+  /* Final CTA */
+  .final-cta { background: var(--slate); color: #fff; border-radius: 28px; padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
+  .final-cta::before { content:''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 120%, rgba(255,90,60,.28), transparent 60%); }
+  .final-cta > * { position: relative; }
+  .final-cta h2 { color: #fff; font-size: clamp(2.1rem, 4.2vw, 3.3rem); margin-bottom: 20px; }
+  .final-cta p { color: #B9C2D4; font-size: 1.2rem; max-width: 560px; margin: 0 auto 34px; }
+  .final-cta .hero-ctas { justify-content: center; }
+  .final-note { margin-top: 22px; font-size: 14px; color: #8C97AD; display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+  .final-note span { display: inline-flex; align-items: center; gap: 7px; }
+
+  /* Footer */
+  footer { padding: 70px 0 40px; border-top: 1px solid var(--line); margin-top: 96px; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+  .foot-brand p { font-size: 15px; margin: 16px 0 0; max-width: 280px; }
+  .foot-col h4 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 18px; font-family: 'Inter', sans-serif; font-weight: 700; }
+  .foot-col a { display: block; font-size: 15px; color: var(--ink-soft); padding: 6px 0; transition: color .2s; }
+  .foot-col a:hover { color: var(--accent); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--ink-soft); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 54px; }
+    .hero-visual { max-width: 540px; margin: 0 auto; }
+    .hero-frame { transform: none; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); gap: 38px 20px; }
+    .problem-grid, .test-grid, .price-grid { grid-template-columns: 1fr; }
+    .feature-row { grid-template-columns: 1fr; gap: 36px; margin-bottom: 70px; }
+    .feature-row.reverse .f-text { order: 1; }
+    .feature-row.reverse .f-visual { order: 2; }
+    .price-card.pop { transform: none; }
+    .price-card.pop:hover { transform: translateY(-6px); }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+
+  @media (max-width: 720px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: block; }
+    .section { padding: 70px 0; }
+    .hero { padding: 44px 0 20px; }
+    .hero-badge.tl { left: 0; top: 14px; }
+    .hero-badge.br { right: 0; bottom: 14px; }
+    .hero-ctas .btn { flex: 1 1 auto; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .final-cta { padding: 60px 24px; border-radius: 20px; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="SyncFlow AI home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 7a8 8 0 0 1 14-5l2-2v6h-6l2.3-2.3A5 5 0 0 0 7 7H4Zm16 10a8 8 0 0 1-14 5l-2 2v-6h6l-2.3 2.3A5 5 0 0 0 17 17h3Z" fill="#fff"/>
+        </svg>
+      </span>
+      SyncFlow AI
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="navlink" href="#features">Platform</a>
+      <a class="navlink" href="#results">Results</a>
+      <a class="navlink" href="#pricing">Pricing</a>
+      <a class="navlink" href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="navlink" href="#" style="font-weight:600;color:var(--ink)">Sign in</a>
+      <a class="btn btn-primary" href="#cta">Start free trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="navlink" href="#features">Platform</a>
+    <a class="navlink" href="#results">Results</a>
+    <a class="navlink" href="#pricing">Pricing</a>
+    <a class="navlink" href="#faq">FAQ</a>
+    <a class="btn btn-primary btn-block" href="#cta">Start free trial</a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Intelligent Operations Automation</span>
+        <h1>Put your busywork on <span class="hl">autopilot</span>, not your team.</h1>
+        <p class="hero-sub">SyncFlow AI connects every tool your ops team touches, then automates the manual handoffs, data entry, and status chasing — so your people focus on work that actually moves the business.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#cta">Start free 14-day trial →</a>
+          <a class="btn btn-ghost" href="#features">See how it works</a>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=80&h=80&fit=crop&crop=faces" alt="" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces" alt="" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces" alt="" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=faces" alt="" loading="lazy" />
+          </div>
+          <div>
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <div class="rating-text"><strong>4.9/5</strong> from 1,200+ operations leaders</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-frame">
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=720&fit=crop" alt="SyncFlow AI operations dashboard showing automated workflows" loading="eager" />
+        </div>
+        <div class="hero-badge tl float" aria-hidden="true">
+          <span class="dot green">⚡</span>
+          <span><span class="b-num">12,480</span><br /><span class="b-lab">tasks automated today</span></span>
+        </div>
+        <div class="hero-badge br float delay" aria-hidden="true">
+          <span class="dot coral">⏱</span>
+          <span><span class="b-num">+22 hrs</span><br /><span class="b-lab">saved per person / week</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOGO WALL (moving) ============ -->
+  <section class="logos">
+    <div class="wrap">
+      <p class="logos-label">Trusted by operations teams at high-growth companies</p>
+    </div>
+    <div class="marquee" aria-label="Customer logos">
+      <div class="marquee-track">
+        <span class="logo"><span class="ico">◆</span>Northwind</span>
+        <span class="logo"><span class="ico">▲</span>Apexor</span>
+        <span class="logo"><span class="ico">●</span>Lumen Labs</span>
+        <span class="logo"><span class="ico">✦</span>Vertice</span>
+        <span class="logo"><span class="ico">◼</span>Quanta</span>
+        <span class="logo"><span class="ico">❖</span>Brightpath</span>
+        <span class="logo"><span class="ico">⬡</span>Cobalt</span>
+        <!-- duplicate set for seamless loop -->
+        <span class="logo"><span class="ico">◆</span>Northwind</span>
+        <span class="logo"><span class="ico">▲</span>Apexor</span>
+        <span class="logo"><span class="ico">●</span>Lumen Labs</span>
+        <span class="logo"><span class="ico">✦</span>Vertice</span>
+        <span class="logo"><span class="ico">◼</span>Quanta</span>
+        <span class="logo"><span class="ico">❖</span>Brightpath</span>
+        <span class="logo"><span class="ico">⬡</span>Cobalt</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS BAND ============ -->
+  <section class="stats-band">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><div class="num"><span class="accent">22</span>hrs</div><div class="lab">Saved per employee weekly</div></div>
+      <div class="stat reveal"><div class="num">90<span class="accent">%</span></div><div class="lab">Fewer manual handoff errors</div></div>
+      <div class="stat reveal"><div class="num">300<span class="accent">+</span></div><div class="lab">Native app integrations</div></div>
+      <div class="stat reveal"><div class="num">14<span class="accent">d</span></div><div class="lab">Average time to first ROI</div></div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM / OBJECTION ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The hidden cost of manual ops</span>
+        <h2>Your team is brilliant. Your busywork is burying them.</h2>
+        <p>Disconnected tools force people to become human glue — copying data, chasing approvals, and reconciling spreadsheets. SyncFlow AI removes the glue.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="prob-card reveal">
+          <div class="prob-ico">🔁</div>
+          <h3>Endless copy-paste</h3>
+          <p>Data re-entered across your CRM, billing, and project tools — slow, error-prone, and impossible to scale.</p>
+        </div>
+        <div class="prob-card reveal">
+          <div class="prob-ico">🕵️</div>
+          <h3>Status black holes</h3>
+          <p>Nobody knows what's blocked or who owns it, so leaders spend their week chasing updates instead of making decisions.</p>
+        </div>
+        <div class="prob-card reveal">
+          <div class="prob-ico">🧩</div>
+          <h3>Brittle one-off scripts</h3>
+          <p>The automations you do have live in someone's head and break the moment a tool updates or that person leaves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES (Z-pattern) ============ -->
+  <section class="section" id="features" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How SyncFlow works</span>
+        <h2>One intelligent layer across your entire stack</h2>
+        <p>Connect, automate, and watch. SyncFlow AI learns your processes and runs them reliably — with humans in the loop only where it matters.</p>
+      </div>
+
+      <div class="feature-row">
+        <div class="f-text reveal">
+          <span class="eyebrow">Connect</span>
+          <h3>Unify 300+ tools in minutes — no code required</h3>
+          <p>Pre-built connectors snap into your CRM, ERP, helpdesk, and finance tools. SyncFlow maps your data automatically, so there's nothing to wire by hand.</p>
+          <ul class="f-list">
+            <li><span class="check">✓</span> Two-way sync that stays consistent in real time</li>
+            <li><span class="check">✓</span> Visual builder your whole team can actually use</li>
+            <li><span class="check">✓</span> SOC 2 Type II &amp; GDPR compliant by default</li>
+          </ul>
+        </div>
+        <div class="f-visual reveal">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=640&fit=crop" alt="Integration map connecting business tools" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="feature-row reverse">
+        <div class="f-text reveal">
+          <span class="eyebrow">Automate</span>
+          <h3>AI agents that run your playbooks end to end</h3>
+          <p>Describe a process in plain language and SyncFlow's agents handle the steps — routing approvals, updating records, and escalating exceptions to the right person automatically.</p>
+          <ul class="f-list">
+            <li><span class="check">✓</span> Natural-language workflow builder</li>
+            <li><span class="check">✓</span> Smart exception handling with human approval gates</li>
+            <li><span class="check">✓</span> Full audit trail on every automated action</li>
+          </ul>
+        </div>
+        <div class="f-visual reveal">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=640&fit=crop" alt="Team reviewing automated workflow analytics" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="f-text reveal">
+          <span class="eyebrow">Watch</span>
+          <h3>Real-time visibility into every process</h3>
+          <p>Live dashboards show what's running, what's saved, and where bottlenecks hide — so you can prove ROI to leadership and continuously optimize.</p>
+          <ul class="f-list">
+            <li><span class="check">✓</span> Executive-ready ROI &amp; time-saved reporting</li>
+            <li><span class="check">✓</span> Anomaly alerts before small issues become outages</li>
+            <li><span class="check">✓</span> Benchmark your ops against industry peers</li>
+          </ul>
+        </div>
+        <div class="f-visual reveal">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=640&fit=crop" alt="Analytics dashboard with operational metrics" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS (outcome oriented) ============ -->
+  <section class="section test-section" id="results">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Proven outcomes</span>
+        <h2>Real teams. Measurable transformations.</h2>
+        <p>We're judged on hours returned and errors eliminated — here's what that looks like in practice.</p>
+      </div>
+      <div class="test-grid">
+        <div class="test-card reveal">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <div class="test-metric">31 hrs</div>
+          <p class="test-quote">"Each ops manager got back nearly a full workweek every month. We redeployed that time straight into customer onboarding."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=92&h=92&fit=crop&crop=faces" alt="" loading="lazy" />
+            <div><div class="t-name">Priya Nair</div><div class="t-role">VP Operations, Northwind</div></div>
+          </div>
+        </div>
+
+        <div class="test-card featured reveal">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <div class="test-metric">$1.2M</div>
+          <p class="test-quote">"SyncFlow eliminated the manual reconciliation that was quietly costing us seven figures a year in errors and rework. Payback in under a quarter."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=92&h=92&fit=crop&crop=faces" alt="" loading="lazy" />
+            <div><div class="t-name">Marcus Holt</div><div class="t-role">COO, Apexor</div></div>
+          </div>
+        </div>
+
+        <div class="test-card reveal">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <div class="test-metric">90%</div>
+          <p class="test-quote">"Handoff errors dropped by 90% in the first month. My team finally trusts the data without double-checking everything by hand."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=92&h=92&fit=crop&crop=faces" alt="" loading="lazy" />
+            <div><div class="t-name">Elena Vasquez</div><div class="t-role">Director of RevOps, Vertice</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Simple, scalable pricing</span>
+        <h2>Plans that pay for themselves in week one</h2>
+        <p>Start free. Upgrade when the time saved speaks for itself. No hidden fees, cancel anytime.</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card reveal">
+          <h3>Starter</h3>
+          <p class="tier-desc">For small teams automating their first workflows.</p>
+          <div class="price-amt">$49<span> /user / mo</span></div>
+          <ul class="price-feats">
+            <li><span class="check">✓</span> Up to 25 integrations</li>
+            <li><span class="check">✓</span> 50 automated workflows</li>
+            <li><span class="check">✓</span> Real-time dashboards</li>
+            <li><span class="check">✓</span> Email support</li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="#cta">Start free trial</a>
+        </div>
+
+        <div class="price-card pop reveal">
+          <span class="pop-tag">Most popular</span>
+          <h3>Growth</h3>
+          <p class="tier-desc">For scaling ops teams that live in their tools.</p>
+          <div class="price-amt">$99<span> /user / mo</span></div>
+          <ul class="price-feats">
+            <li><span class="check">✓</span> Unlimited integrations</li>
+            <li><span class="check">✓</span> Unlimited AI workflows &amp; agents</li>
+            <li><span class="check">✓</span> Advanced ROI reporting</li>
+            <li><span class="check">✓</span> Priority support &amp; onboarding</li>
+            <li><span class="check">✓</span> SOC 2 &amp; SSO included</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="#cta">Start free trial</a>
+        </div>
+
+        <div class="price-card reveal">
+          <h3>Enterprise</h3>
+          <p class="tier-desc">For organizations with security &amp; scale needs.</p>
+          <div class="price-amt">Custom</div>
+          <ul class="price-feats">
+            <li><span class="check">✓</span> Everything in Growth</li>
+            <li><span class="check">✓</span> Dedicated success manager</li>
+            <li><span class="check">✓</span> Custom SLAs &amp; deployment</li>
+            <li><span class="check">✓</span> Advanced governance &amp; audit</li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="#cta">Talk to sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ (objection handling) ============ -->
+  <section class="section" id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Questions, answered</span>
+        <h2>Everything you need to feel confident</h2>
+      </div>
+      <div class="faq-wrap">
+        <div class="faq-item">
+          <button class="faq-q">How long until we see real value?<span class="pm">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Most teams launch their first automations within hours of connecting their tools, and see measurable time savings within the 14-day free trial. The average customer reaches positive ROI in 14 days.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do I need engineers to set it up?<span class="pm">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. SyncFlow is built for operators, not developers. Pre-built connectors and a natural-language workflow builder mean your ops team can launch automations without writing a line of code — though we offer a full API when you want it.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is our data secure?<span class="pm">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. SyncFlow AI is SOC 2 Type II certified and GDPR compliant, with encryption in transit and at rest, granular role-based access, SSO, and a complete audit trail on every automated action.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What if a tool we use isn't supported?<span class="pm">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">With 300+ native integrations plus a universal API and webhook layer, nearly any tool can connect. If something's missing, our team will build the connector with you — included on Growth and Enterprise plans.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can we cancel anytime?<span class="pm">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely. There are no long-term contracts on Starter or Growth — cancel anytime, and you keep access through the end of your billing period. No questions, no friction.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="wrap" id="cta">
+    <div class="final-cta reveal">
+      <div class="stars" aria-hidden="true" style="font-size:20px;margin-bottom:18px;">★★★★★</div>
+      <h2>Give your team their week back.</h2>
+      <p>Join 1,200+ operations leaders automating the busywork with SyncFlow AI. Start free — no credit card required.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#">Start free 14-day trial →</a>
+        <a class="btn btn-light" href="#">Book a demo</a>
+      </div>
+      <div class="final-note">
+        <span>✓ No credit card required</span>
+        <span>✓ Setup in under an hour</span>
+        <span>✓ Cancel anytime</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 7a8 8 0 0 1 14-5l2-2v6h-6l2.3-2.3A5 5 0 0 0 7 7H4Zm16 10a8 8 0 0 1-14 5l-2 2v-6h6l-2.3 2.3A5 5 0 0 0 17 17h3Z" fill="#fff"/>
+            </svg>
+          </span>
+          SyncFlow AI
+        </a>
+        <p>Intelligent operations automation that gives high-growth teams their time back.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="#features">Platform</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#results">Customers</a>
+        <a href="#">Integrations</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SyncFlow AI, Inc. All rights reserved.</span>
+      <span>Built for operations teams who'd rather build the business.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  const burger = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const ans = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 80 + 'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
