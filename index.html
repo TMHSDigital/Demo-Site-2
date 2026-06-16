@@ -433,6 +433,43 @@
   .foot-col a:hover { color: var(--accent); }
   .foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--ink-soft); }
 
+  /* Integrations grid */
+  .int-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .int-card {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .int-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(255,90,60,.28); }
+  .int-logo { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 18px; color: #fff; }
+  .int-name { font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.2; }
+  .int-cat { font-size: 12.5px; color: var(--ink-soft); }
+  .int-card.more { justify-content: center; border-style: dashed; background: transparent; }
+  .int-card.more .int-name { color: var(--accent-deep); }
+
+  /* Comparison table */
+  .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
+  .compare { width: 100%; min-width: 660px; border-collapse: separate; border-spacing: 0;
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .compare th, .compare td { padding: 17px 22px; border-bottom: 1px solid var(--line); text-align: center; }
+  .compare thead th { font-family: 'Fraunces', serif; font-size: 1.06rem; font-weight: 600; color: var(--ink); }
+  .compare tbody tr:last-child td { border-bottom: none; }
+  .compare .feat { text-align: left; font-weight: 600; font-size: 14.5px; color: var(--ink); }
+  .compare .col-head .c-sub { display: block; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-top: 3px; }
+  .compare .sf { background: rgba(255,90,60,.055); }
+  .compare thead th.sf { color: var(--accent-deep); position: relative; }
+  .compare th.sf .tag { display: inline-block; margin-top: 6px; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .mark { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; font-weight: 700; }
+  .mark.yes { background: #E9F8EF; color: #1F9D55; }
+  .mark.no { background: #F1F3F7; color: #9AA6BC; }
+  .mark.partial { background: #FFF4E0; color: #B7791F; }
+  .c-note { font-size: 13px; color: var(--ink-soft); }
+  td.sf .c-note { color: var(--ink); font-weight: 600; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
   .reveal.in { opacity: 1; transform: none; }
@@ -444,6 +481,7 @@
     .hero-frame { transform: none; }
     .stats-grid { grid-template-columns: repeat(2,1fr); gap: 38px 20px; }
     .problem-grid, .test-grid, .price-grid { grid-template-columns: 1fr; }
+    .int-grid { grid-template-columns: repeat(2,1fr); }
     .feature-row { grid-template-columns: 1fr; gap: 36px; margin-bottom: 70px; }
     .feature-row.reverse .f-text { order: 1; }
     .feature-row.reverse .f-visual { order: 2; }
@@ -498,6 +536,7 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a class="navlink" href="#features">Platform</a>
+      <a class="navlink" href="#integrations">Integrations</a>
       <a class="navlink" href="#results">Results</a>
       <a class="navlink" href="#pricing">Pricing</a>
       <a class="navlink" href="#faq">FAQ</a>
@@ -512,6 +551,7 @@
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a class="navlink" href="#features">Platform</a>
+    <a class="navlink" href="#integrations">Integrations</a>
     <a class="navlink" href="#results">Results</a>
     <a class="navlink" href="#pricing">Pricing</a>
     <a class="navlink" href="#faq">FAQ</a>
@@ -684,6 +724,31 @@
     </div>
   </section>
 
+  <!-- ============ INTEGRATIONS ============ -->
+  <section class="section" id="integrations" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">300+ integrations</span>
+        <h2>Connects to the tools you already run on</h2>
+        <p>Pre-built, two-way connectors for the systems your team lives in — with a universal API and webhooks for everything else.</p>
+      </div>
+      <div class="int-grid">
+        <div class="int-card reveal"><span class="int-logo" style="background:#00A1E0">S</span><span><span class="int-name">Salesforce</span><br /><span class="int-cat">CRM</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#FF7A59">H</span><span><span class="int-name">HubSpot</span><br /><span class="int-cat">CRM &amp; Marketing</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#4A154B">S</span><span><span class="int-name">Slack</span><br /><span class="int-cat">Communication</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#635BFF">S</span><span><span class="int-name">Stripe</span><br /><span class="int-cat">Payments</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#2E7D32">N</span><span><span class="int-name">NetSuite</span><br /><span class="int-cat">ERP</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#2684FF">J</span><span><span class="int-name">Jira</span><br /><span class="int-cat">Project management</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#03363D">Z</span><span><span class="int-name">Zendesk</span><br /><span class="int-cat">Support</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#111111">N</span><span><span class="int-name">Notion</span><br /><span class="int-cat">Docs &amp; wikis</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#4285F4">G</span><span><span class="int-name">Google Workspace</span><br /><span class="int-cat">Productivity</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#2CA01C">Q</span><span><span class="int-name">QuickBooks</span><br /><span class="int-cat">Finance</span></span></div>
+        <div class="int-card reveal"><span class="int-logo" style="background:#29B5E8">S</span><span><span class="int-name">Snowflake</span><br /><span class="int-cat">Data warehouse</span></span></div>
+        <a class="int-card more reveal" href="#cta"><span class="int-name">+300 more →</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TESTIMONIALS (outcome oriented) ============ -->
   <section class="section test-section" id="results">
     <div class="wrap">
@@ -722,6 +787,67 @@
             <div><div class="t-name">Elena Vasquez</div><div class="t-role">Director of RevOps, Vertice</div></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section class="section" id="compare" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why teams switch</span>
+        <h2>The honest comparison</h2>
+        <p>How SyncFlow AI stacks up against the two things ops teams usually do instead.</p>
+      </div>
+      <div class="compare-wrap reveal">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th class="feat" scope="col">Capability</th>
+              <th class="col-head" scope="col">Manual &amp; spreadsheets</th>
+              <th class="col-head" scope="col">DIY scripts &amp; generic iPaaS</th>
+              <th class="col-head sf" scope="col">SyncFlow AI<span class="tag">Recommended</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat">Time to first automation</td>
+              <td><span class="c-note">Weeks</span></td>
+              <td><span class="c-note">Days</span></td>
+              <td class="sf"><span class="c-note">Minutes</span></td>
+            </tr>
+            <tr>
+              <td class="feat">No engineers required</td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td class="sf"><span class="mark yes" title="Yes"><span class="sr-only">Yes</span>✓</span></td>
+            </tr>
+            <tr>
+              <td class="feat">Self-healing error handling</td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td><span class="mark partial" title="Partial"><span class="sr-only">Partial</span>~</span></td>
+              <td class="sf"><span class="mark yes" title="Yes"><span class="sr-only">Yes</span>✓</span></td>
+            </tr>
+            <tr>
+              <td class="feat">Real-time visibility &amp; ROI reporting</td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td><span class="mark partial" title="Partial"><span class="sr-only">Partial</span>~</span></td>
+              <td class="sf"><span class="mark yes" title="Yes"><span class="sr-only">Yes</span>✓</span></td>
+            </tr>
+            <tr>
+              <td class="feat">Scales without rework</td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td><span class="mark partial" title="Partial"><span class="sr-only">Partial</span>~</span></td>
+              <td class="sf"><span class="mark yes" title="Yes"><span class="sr-only">Yes</span>✓</span></td>
+            </tr>
+            <tr>
+              <td class="feat">SOC 2 Type II &amp; GDPR built in</td>
+              <td><span class="mark no" title="No"><span class="sr-only">No</span>✕</span></td>
+              <td><span class="mark partial" title="Partial"><span class="sr-only">Partial</span>~</span></td>
+              <td class="sf"><span class="mark yes" title="Yes"><span class="sr-only">Yes</span>✓</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
