@@ -6,6 +6,8 @@
 <meta name="description" content="SyncFlow AI is the intelligent operations automation platform that eliminates manual busywork, syncs your tools, and gives ops teams back 20+ hours a week." />
 <meta name="theme-color" content="#0E1A2B" />
 <meta name="author" content="TMHSDigital" />
+<meta name="robots" content="index, follow" />
+<meta name="color-scheme" content="light" />
 <title>SyncFlow AI — Intelligent Operations Automation for Modern Teams</title>
 <link rel="canonical" href="https://tmhsdigital.github.io/syncflow-frontend-demo/" />
 
@@ -18,15 +20,17 @@
 <meta property="og:title" content="SyncFlow AI — Intelligent Operations Automation" />
 <meta property="og:description" content="Put your busywork on autopilot, not your team. SyncFlow AI connects every tool your ops team touches and automates the manual handoffs." />
 <meta property="og:url" content="https://tmhsdigital.github.io/syncflow-frontend-demo/" />
-<meta property="og:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=630&fit=crop" />
+<meta property="og:image" content="https://tmhsdigital.github.io/syncflow-frontend-demo/image_5bce99.png" />
+<meta property="og:image:alt" content="SyncFlow AI operations dashboard interface" />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:height" content="960" />
 
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="SyncFlow AI — Intelligent Operations Automation" />
 <meta name="twitter:description" content="Put your busywork on autopilot, not your team. Intelligent operations automation for modern teams." />
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=630&fit=crop" />
+<meta name="twitter:image" content="https://tmhsdigital.github.io/syncflow-frontend-demo/image_5bce99.png" />
+<meta name="twitter:image:alt" content="SyncFlow AI operations dashboard interface" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,8 +52,9 @@
     --ink:       #14203A;  /* supporting 30% */
     --ink-soft:  #475069;  /* muted body text */
     --line:      #E6E9EF;
-    --accent:    #FF5A3C;  /* vivid accent 10% — CTAs only */
+    --accent:    #FF5A3C;  /* vivid accent 10% — CTAs / large highlights */
     --accent-dk: #E8482B;
+    --accent-deep: #C2381A; /* WCAG-AA accent for small text on light bg (5.1:1) */
     --gold:      #FFB020;
     --radius:    16px;
     --radius-sm: 10px;
@@ -97,6 +102,16 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
 
+  /* Accessibility: visible keyboard focus + skip link */
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .skip-link {
+    position: absolute; left: 16px; top: -64px; z-index: 200;
+    background: var(--slate); color: #fff; padding: 12px 20px;
+    border-radius: 10px; font-weight: 600; font-size: 15px;
+    transition: top .25s var(--ease);
+  }
+  .skip-link:focus { top: 16px; }
+
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
   .eyebrow {
@@ -105,7 +120,7 @@
     font-weight: 600;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);   /* AA-contrast coral for small text */
     margin-bottom: 18px;
   }
 
@@ -468,6 +483,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
+
 <!-- ============ HEADER ============ -->
 <header id="site-header">
   <div class="wrap nav">
@@ -502,7 +519,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-grid">
@@ -530,7 +547,7 @@
 
       <div class="hero-visual">
         <div class="hero-frame">
-          <img src="image_5bce99.png" alt="SyncFlow AI Dashboard Interface" loading="eager" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=720&fit=crop&q=80';">
+          <img src="image_5bce99.png" alt="SyncFlow AI Dashboard Interface" width="1200" height="960" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=720&fit=crop&q=80';">
         </div>
         <div class="hero-badge tl float" aria-hidden="true">
           <span class="dot green">⚡</span>
@@ -878,19 +895,29 @@
     burger.setAttribute('aria-expanded', 'false');
   }));
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-q').forEach(q => {
+  // FAQ accordion (with ARIA wiring for screen readers + keyboard)
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, idx) => {
+    const q = item.querySelector('.faq-q');
+    const ans = item.querySelector('.faq-a');
+    const ansId = 'faq-answer-' + (idx + 1);
+    ans.id = ansId;
+    ans.setAttribute('role', 'region');
+    q.setAttribute('type', 'button');
+    q.setAttribute('aria-expanded', 'false');
+    q.setAttribute('aria-controls', ansId);
+
     q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const ans = item.querySelector('.faq-a');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => {
+      const willOpen = !item.classList.contains('open');
+      faqItems.forEach(i => {
         i.classList.remove('open');
         i.querySelector('.faq-a').style.maxHeight = null;
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
       });
-      if (!isOpen) {
+      if (willOpen) {
         item.classList.add('open');
         ans.style.maxHeight = ans.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
       }
     });
   });
@@ -943,6 +970,71 @@
   };
   if (document.readyState === 'complete') showBadges();
   else window.addEventListener('load', showBadges);
+</script>
+
+<!-- Structured data for SEO / rich results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tmhsdigital.github.io/syncflow-frontend-demo/#org",
+      "name": "SyncFlow AI",
+      "url": "https://tmhsdigital.github.io/syncflow-frontend-demo/",
+      "logo": "https://tmhsdigital.github.io/syncflow-frontend-demo/image_5bce99.png",
+      "description": "Intelligent operations automation that connects every tool your ops team touches and automates the manual handoffs."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "SyncFlow AI",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://tmhsdigital.github.io/syncflow-frontend-demo/",
+      "publisher": { "@id": "https://tmhsdigital.github.io/syncflow-frontend-demo/#org" },
+      "offers": [
+        { "@type": "Offer", "name": "Starter", "price": "49", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Growth", "price": "99", "priceCurrency": "USD" }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1200",
+        "bestRating": "5"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long until we see real value?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most teams launch their first automations within hours of connecting their tools, and see measurable time savings within the 14-day free trial. The average customer reaches positive ROI in 14 days." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need engineers to set it up?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. SyncFlow is built for operators, not developers. Pre-built connectors and a natural-language workflow builder mean your ops team can launch automations without writing a line of code, though we offer a full API when you want it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is our data secure?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. SyncFlow AI is SOC 2 Type II certified and GDPR compliant, with encryption in transit and at rest, granular role-based access, SSO, and a complete audit trail on every automated action." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a tool we use isn't supported?",
+          "acceptedAnswer": { "@type": "Answer", "text": "With 300+ native integrations plus a universal API and webhook layer, nearly any tool can connect. If something's missing, our team will build the connector with you, included on Growth and Enterprise plans." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we cancel anytime?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. There are no long-term contracts on Starter or Growth. Cancel anytime, and you keep access through the end of your billing period." }
+        }
+      ]
+    }
+  ]
+}
 </script>
 </body>
 </html>
